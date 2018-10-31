@@ -18,4 +18,8 @@ public class StringUtil {
   public static boolean isNotEmpty(String str) {
     return !isEmpty(str);
   }
+
+  public static String replace(String origin, String target, String replacement) {
+    return StringUtils.replace(origin, target, replacement);
+  }
 }
