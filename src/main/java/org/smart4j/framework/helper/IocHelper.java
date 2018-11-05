@@ -9,7 +9,7 @@ import org.smart4j.framework.util.ReflectionUtil;
  * @author: Daniels Gao
  * @date: 2018/11/5 21:31
  */
-public class IOCHelper {
+public class IocHelper {
 
   static {
     Map<Class<?>, Object> beans = BeanHelper.getAllBeans();

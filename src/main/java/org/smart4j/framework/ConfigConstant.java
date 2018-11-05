@@ -8,7 +8,7 @@ public interface ConfigConstant {
 
   String CONFIG_FILE = "smart.properties";
 
-  interface JDBC {
+  interface Jdbc {
 
     String DRIVER = "smart.framework.jdbc.driver";
 
@@ -19,7 +19,7 @@ public interface ConfigConstant {
     String PASSWORD = "smart.framework.jdbc.password";
   }
 
-  interface APP {
+  interface App {
 
     String BASE_PACKAGE = "smart.framework.app.base.package";
 
