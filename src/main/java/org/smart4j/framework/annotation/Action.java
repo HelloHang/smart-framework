@@ -1,6 +1,8 @@
 package org.smart4j.framework.annotation;
 
 
+import org.smart4j.framework.constant.RequestMethod;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,4 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Action {
 
+	String value();
+
+	RequestMethod method();
 }
