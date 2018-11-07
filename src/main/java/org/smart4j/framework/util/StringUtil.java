@@ -22,4 +22,9 @@ public class StringUtil {
   public static String replace(String origin, String target, String replacement) {
     return StringUtils.replace(origin, target, replacement);
   }
+
+  public static String[] split(String str, String separatorChars){
+    return StringUtils.split(str, separatorChars);
+  }
+
 }

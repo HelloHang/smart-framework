@@ -1,10 +1,12 @@
 package org.smart4j.framework.helper;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.smart4j.framework.annotation.Inject;
 import org.smart4j.framework.util.ReflectionUtil;
 
 /**
@@ -22,6 +24,22 @@ public class BeanHelper {
       Object obj = ReflectionUtil.newInstance(c);
       BEAN_MAP.put(c, obj);
     });
+
+    //注入依赖对象
+    for (Map.Entry<Class<?>, Object> entry : BEAN_MAP.entrySet()) {
+      Class<?> cls = entry.getClass();
+      Object bean = entry.getValue();
+      Field[] fields = cls.getDeclaredFields();
+      for (Field field : fields) {
+        if(field.isAnnotationPresent(Inject.class)){
+          Class<?> fieldType = field.getType();
+          Object fieldBean =BEAN_MAP.get(fieldType);
+          if (fieldBean != null){
+            ReflectionUtil.setField(bean, field, fieldBean);
+          }
+        }
+      }
+    }
   }
 
   public static Map<Class<?>, Object> getAllBeans(){
@@ -30,6 +48,7 @@ public class BeanHelper {
 
   public static Object getBeanByClass(Class<?> cls){
     if(!BEAN_MAP.containsKey(cls)){
+      LOG.error(String.format("Can't get bean by class[%s]", cls.getName()));
       throw  new RuntimeException(String.format("Can't get bean by class[%s]", cls.getName()));
     }
     return BEAN_MAP.get(cls);
