@@ -26,18 +26,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebServlet(urlPatterns = "/", loadOnStartup = 0) public class DispatcherServlet extends HttpServlet
+@WebServlet(urlPatterns = "/", loadOnStartup = 0)
+public class DispatcherServlet extends HttpServlet
 {
-	@Override public void init(ServletConfig config) throws ServletException
+	@Override
+	public void init(ServletConfig config) throws ServletException
 	{
 		ServletContext servletContext = config.getServletContext();
-		ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
+		ServletRegistration jspServlet =   servletContext.getServletRegistration("jsp");
 		jspServlet.addMapping(ConfigHelper.getAppJspPath().concat("*"));
 		ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
 		defaultServlet.addMapping(ConfigHelper.getAppAssetPath().concat("*"));
 	}
 
-	@Override protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		RequestMethod requestMethod = RequestMethod.valueOf(req.getMethod().toUpperCase());
 		String requestPath = req.getPathInfo();
